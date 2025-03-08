@@ -79,6 +79,50 @@ func main() {
 
 	fmt.Println(filterSlice)
 
+	/*
+		Reverse a Slice
+
+		Create a slice []int{1, 2, 3, 4, 5}.
+		Write a function to reverse the slice in place (without creating a new slice).
+		Print the reversed slice.
+	*/
+
+	reversedSlice := reverseSlice(mergeSlice)
+	fmt.Println(mergeSlice, reversedSlice)
+
+	/*
+		Find the Maximum Value in a Slice
+
+			Create a slice []int{45, 23, 67, 12, 89}.
+			Write a function to find the maximum value in the slice.
+			Print the maximum value.
+	*/
+
+	maxSlice := []int{45, 23, 67, 12, 89}
+	maxValue := findMaxValue(maxSlice)
+	fmt.Println(maxValue)
+
+	/*
+		Check if Two Slices Are Equal
+
+		Create two slices: []int{1, 2, 3} and []int{1, 2, 3}.
+		Write a function to check if the two slices are equal (same length and elements).
+		Test the function with different slices.
+	*/
+
+	slice1, slice2 := []int{1, 2, 3}, []int{1, 2, 3}
+	fmt.Println(isEqualSlice(slice1, slice2))
+
+	/*
+		Remove Duplicates from a Slice
+
+			Create a slice []int{1, 2, 2, 3, 4, 4, 5}.
+			Write a function to remove duplicate elements.
+			Print the slice without duplicates.
+	*/
+	duplicatesSlice := []int{1, 2, 2, 3, 4, 4, 5}
+	fmt.Println(removeDuplicatesElement(duplicatesSlice))
+
 }
 
 func removeElement(slice []int, index int) []int {
@@ -99,6 +143,56 @@ func filterSlice(slices []int, limit int) []int {
 			filterSlices = append(filterSlices, value)
 		}
 	}
-
 	return filterSlices
 }
+
+func reverseSlice(slice []int) []int {
+	for i, j := 0, len(slice)-1; i < j; i, j = i+1, j-1 {
+		slice[i], slice[j] = slice[j], slice[i]
+	}
+	return slice
+}
+
+func findMaxValue(slice []int) int {
+	maxValue := slice[0]
+	for _, val := range slice {
+		if val > maxValue {
+			maxValue = val
+		}
+	}
+	return maxValue
+}
+
+func isEqualSlice(slice1 []int, slice2 []int) bool {
+	if len(slice1) != len(slice2) {
+		return false
+	}
+	for index := range slice1 {
+		if slice1[index] != slice2[index] {
+			return false
+		}
+	}
+	return true
+}
+
+func removeDuplicatesElement(slice []int) []int {
+	var newSlice []int
+	for _, val := range slice {
+		if includes(newSlice, val) {
+			continue
+		}
+		newSlice = append(newSlice, val)
+	}
+	return newSlice
+}
+
+func includes(slice []int, element int) bool {
+	for _, val := range slice {
+		if val == element {
+			return true
+		}
+	}
+	return false
+}
+
+// Need to learn about slice module.
